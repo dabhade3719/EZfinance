@@ -22,7 +22,7 @@ EZfinance is a web-based personal finance management application designed to hel
 
 📂 Project Structure
 
-EZfinance/
+- EZfinance/
 - │── index.php
 - │── css/
 - │── js/
