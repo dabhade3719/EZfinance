@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EZfinance: Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Adding image as background */
+        html, body {
+    overflow: hidden;
+    height: 100%;
+}
+
+        header.jumbotron {
+            background: url('file:///C:/wamp/www/php/Images/ai-financial-advisor_0.jpg') no-repeat center center;
+            background-size: cover;
+        }
+       .myimg{
+          width: 100%;
+          height: 550;
+          margin: 0%;
+       }
+       #bgimg{
+        width: 100%;
+        height: 550;
+        margin: 0%;
+       }
+       .overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.695); /* Semi-transparent black background */
+            padding: 20px; /* Add some padding around the text */
+            border-radius: 10px; /* Optional: Add rounded corners */
+        }
+
+        .overlay-text h1 {
+            font-size: 3em;
+            margin: 0;
+        }
+
+        .overlay-text p {
+            font-size: 1.5em;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="index.html"><b class="EZ">EZ</b><i>f</i>inance</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link nbtn" href="index.html"><b><u>Home</u></b></a></li>
+                <li class="nav-item"><a class="nav-link nbtn" href="features.html"><b>Our Features</b></a></li>
+                <li class="nav-item"><a class="nav-link nbtn" href="about.html"><b>About</b></a></li>
+                <li class="nav-item"><a class="nav-link nbtn" href="services.html"><b>Services</b></a></li>
+                <li class="nav-item"><a class="nav-link nbtn" href="blog.html"><b>Blog</b></a></li>
+                <li class="nav-item"><a class="nav-link nbtn" href="courses.html"><b>Learn Finance</b></a></li>
+                <li class="nav-item"><a class="nav-link nbtn" href="ai-chatbot.html"><b>AI Assistant</b></a></li>
+            </ul>
+        </div>
+    </nav>
+ 
+    <div class="myimg">
+     <img src="PHP/Images/ai-financial-advisor_0.jpg" width="100%" height="550" id="bgimg">
+    
+  
+     <header class="jumbotron jumbotron-fluid text-center">
+        <div class="container">
+            <div class="overlay-text">
+            <h1 class="display-4">Welcome to <b class="EZ">EZ</b><i>f</i>inance</h1><hr color="white">
+            <p class="lead">Your trusted personal financial advisor</p><hr color="white">
+            <center><a href="http://localhost/PHP/form.php?#"><button class="button">
+                Get Started
+                <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
+                  <path
+                    clip-rule="evenodd"
+                    d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+                    fill-rule="evenodd"></path>
+                </svg>
+              </button></a></center>
+              </div>
+         </div>
+    </div>
+     </header>
+
+     <footer>
+        <p>&copy; 2025 EZfinance. All Rights Reserved. | <a href="feedback.html">Give Feedback</a></p>
+    </footer>
+    
+
+    <!-- Include Bootstrap JS and custom JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="chatbot.js"></script>
+</body>
+</html>

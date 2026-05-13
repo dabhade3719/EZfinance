@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EZfinance: AI Assistant</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            text-decoration: white;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .chatbot-container {
+            background-color: #1B263B;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .chatbot-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .chatbot-messages {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #415A77;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: #0D1B2A;
+        }
+
+        .message {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .user-message {
+            background-color: #415A77;
+            text-align: right;
+            color: white;
+        }
+
+        .ai-message {
+            background-color: #1B263B;
+            color: white;
+        }
+
+        .chatbot-form {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .chatbot-input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #415A77;
+            margin-right: 10px;
+            background-color: #0D1B2A;
+            color: white;
+        }
+
+        .chatbot-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: #415A77;
+            color: white;
+            cursor: pointer;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #1B263B;
+            overflow-x: hidden;
+            padding-top: 60px;
+            transition: 0.5s;
+        }
+
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            color: white;
+            display: block;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+        .openbtn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: #1B263B;
+            color: white;
+            cursor: pointer;
+            
+            top: 10px;
+            left: 10px;
+        }
+
+        .openbtn:hover {
+            background-color: #415A77;
+        }
+
+        .dropdown-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        #main {
+            transition: margin-left .5s;
+            padding: 20px;
+        }
+
+        .dropdown-list {
+            display: none;
+            background-color: #1B263B;
+            margin-left: 20px;
+        }
+
+        .dropdown-list a {
+            padding: 8px 32px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .dropdown-list a:hover {
+            background-color: #415A77;
+        }
+
+        .sidebar .active .dropdown-list {
+            display: block;
+        }
+
+        /* Fix for chatbot visibility */
+        #chat-container {
+            margin-left: 0; /* Prevent the margin from shifting when sidebar is open */
+            transition: margin-left 0.5s;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Make sure the chatbot stays visible */
+        .sidebar-open #chat-container {
+            margin-left: 250px; /* Shift the content slightly when sidebar is open */
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="index.html"><b class="EZ">EZ</b><i>f</i>inance</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link nbtn" href="index.html"><b>Home</b></a></li>
+                <li class="nav-item"><a class="nav-link nbtn" href="features.html"><b>Our Features</b></a></li>
+                <li class="nav-item"><a class="nav-link nbtn" href="about.html"><b>About</b></a></li>
+                <li class="nav-item"><a class="nav-link nbtn" href="services.html"><b>Services</b></a></li>
+                <li class="nav-item"><a class="nav-link nbtn" href="blog.html"><b>Blog</b></a></li>
+                <li class="nav-item"><a class="nav-link nbtn" href="courses.html"><b>Learn Finance</b></a></li>
+                <li class="nav-item"><a class="nav-link nbtn" href="ai-chatbot.html" style="text-decoration: underline;"><b>AI Assistant</b></a></li>
+            </ul>
+        </div>
+    </nav><br>
+<div>
+    <button class="openbtn" onclick="openNav()">☰ Open Sidebar</button>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="expense_tracker.php"><big>Expense Tracker</big></a>
+        <a href="news.html" ><big>Latest Finance related news</big></a>
+        
+        <a href="javascript:void(0)" class="sidebar-item" onclick="toggleDropdown('dropdown1')"><big>Financial Calculations</big></a>
+        <div id="dropdown1" class="dropdown-list">
+            <a href="simpleinterest.html">Calculate Simple Interest</a>
+            <a href="emi.html">Calculate EMI</a>
+            <a href="tax.html">Calculate Tax</a>
+            <a href="sip.html">Calculate SIP</a>
+        </div>
+        <a href="currency.html" ><big>Currency Converter</big></a>
+        <a href="whatsappassistant.html" ><big>EZfinance Whatsapp Assistant</big></a>
+        </div>
+    </div>
+</div>
+    <div class="container">
+        <!-- Chatbot UI -->
+        <div class="chatbot-container">
+            <div class="chatbot-header">
+                <h2><b class="EZ">EZ</b><i>f</i>inance AI Chatbot</h2>
+                <p>Ask me anything about your investments!</p>
+            </div>
+            <div id="chatbot-messages" class="chatbot-messages">
+                <!-- Chat messages will be inserted here -->
+            </div>
+            <form id="chatbot-form" class="chatbot-form">
+                <input type="text" id="chatbot-input" class="chatbot-input" placeholder="Type your question here..." required>
+                <button type="submit" class="chatbot-button">Send</button>
+                <button type="button" class="chatbot-button" onclick="startVoiceRecognition()">🎤</button>
+            </form>
+        </div><br><br>
+    </div><br><br><br>
+
+    <footer>
+        <p>&copy; 2025 EZfinance. All Rights Reserved. | <a href="feedback.html">Give Feedback</a></p>
+    </footer>
+    
+
+    <!-- Include Bootstrap JS and custom JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="chatbot.js"></script>
+
+ 
+</body>
+</html>
